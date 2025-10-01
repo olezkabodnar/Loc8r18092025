@@ -1,80 +1,227 @@
-@import url("//fonts.googleapis.com/css?family=Lobster|Cabin:400,700");
+/* Custom CSS was taken from https://app.wearebeam.ie   /*
+
+/* Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+.bold-text {
+    font-weight: 1200;
+}
 
 body {
-  font-family: "Cabin", Arial, sans-serif;
-  color: #ffffff;
-  background-color: #108a93;
+    background-color: #f5f7f9;
+    font-family: 'Inter', sans-serif;
+    padding: 20px;
 }
-
-h1, h2, h3, h4, h5, h6 {
-  font-family: 'Lobster', cursive;
-}
-
-.navbar {
-  background-color: #ad1d28;
-  border-color: #911821;
-}
-
-.navbar-brand {
-  font-family: 'Lobster', cursive;
-}
-
-.banner {
-  margin-top: 4em;
-  border-bottom: 1px solid #469ea8;
-  margin-bottom: 1.5em;
-  padding-bottom: 0.5em;
-}
-
-h1 small {
-  color: #aaa;
-}
-
 .card {
-  background-color: #469ea8;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    
+    
 }
 
-.card-primary {
-  border-color: #a2ced3;
-  margin-bottom: 1rem;
+.card-body {
+    padding: 20px;
+    
+}
+.card-header {
+    background-color: #8099d3; 
+    color: #fff;
+    padding: 15px 20px;
+    border-bottom: 1px solid #6b7fb0;
+    border-radius: 10px 10px 0px 0px;
 }
 
-.review-header {
-  background-color: #31727a;
-  padding-top: 0.5em;
-  padding-bottom: 0.5em;
-  margin-bottom: 0.5em;
+.card-header h3 {
+    margin: 0;
+    font-size: 1.5em;
 }
 
-.review {
-  margin-right: -20px;
-  margin-left: -20px;
-  margin-bottom: 1em;
+.card-header a {
+    color: #fff;
+    font-weight: bold;
+}
+.card-header a:hover {
+    color: #fff;
+    text-decoration: underline;
+}
+.btn-primary {
+    background-color: #cb89ce;
+    color: #fff;
+    border: 0;
 }
 
-.badge-default, .btn-primary {
-  background-color: #ad1d28;
-  border-color: #911821;
+
+
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active {
+    background-color: #b172b6;
+    color: #fff;
+    border: 0;
 }
 
-h4 a, h4 a:hover {
-  color: #fff;
+.page-link {
+    color: #cb89ce;
+    background-color: #fff;
+    border: 1px solid #cb89ce;
 }
 
-h4 small {
-  font-size: 60%;
-  line-height: 200%;
-  color: #aaa;
+
+
+.page-link:hover,
+.page-link:focus,
+.page-link:active {
+    color: #fff;
+    background-color: #cb89ce;
+    border-color: #cb89ce;
 }
 
-.address {
-  margin-bottom: 0.5rem;
+.page-item.active .page-link {
+    color: #fff;
+    background-color: #cb89ce;
+    border-color: #cb89ce;
 }
 
-.facilities span.badge {
-  margin-right:2px;
+
+
+.page-item.disabled .page-link {
+    color: #6c757d;
+    background-color: #fff;
+    border-color: #dee2e6;
 }
 
-legend {
-  font-family: 'Lobster', cursive;
+
+
+.dropdown-menu {
+    background-color: #8099d3;
+    border-radius: 5px;
+}
+
+.dropdown-item {
+    color: #fff;
+}
+
+.dropdown-item:hover,
+.dropdown-item:focus {
+    background-color: #b172b6;
+    color: #fff;
+}
+
+.navbar-nav .nav-link {
+    color: #fff;
+    background-color: #cb89ce;
+    border-radius: 5px;
+    padding: 5px 10px;
+}
+
+
+
+.navbar-nav .nav-link:hover,
+.navbar-nav .nav-link:focus,
+.navbar-nav .nav-link:active {
+    color: #fff;
+    background-color: #b172b6;
+}
+
+.navbar-nav .dropdown-toggle {
+    color: #fff;
+    background-color: #cb89ce;
+    border-radius: 5px;
+    padding: 5px 10px;
+}
+
+
+.navbar-nav .dropdown-toggle:hover,
+.navbar-nav .dropdown-toggle:focus,
+.navbar-nav .dropdown-toggle:active {
+    color: #fff;
+    background-color: #b172b6;
+}
+
+.footer {
+    background-color: #000;
+    color: #fff;
+    padding: 1rem 0;
+}
+
+.footer img {
+    max-width: 100px;
+}
+
+.table-striped tbody tr.main-row:nth-of-type(odd) {
+    background-color: #f2f2f2;
+}
+
+.table-striped tbody tr.main-row:nth-of-type(even) {
+    background-color: #ffffff;
+}
+
+.rag-dropdown {
+    width: 100px;
+}
+
+.rag-dropdown option.red {
+    background-color: red !important;
+    color: white;
+}
+
+.rag-dropdown option.orange {
+    background-color: orange;
+    color: white;
+}
+
+.rag-dropdown option.green {
+    background-color: green;
+    color: white;
+}
+
+.no-caret::after {
+    display: none !important;    
+}
+
+table td {
+    vertical-align: middle;
+}
+
+.case-type {
+    font-size: 0.9em;
+    color: darkgrey;
+    font-style: italic;
+}
+
+.client-name {
+    font-size: 14px;    
+}
+
+.client-address {
+    font-size: 14px;
+    font-weight: bold;
+    color: purple;
+}
+
+a.dark-link {
+    color: #374151 !important;
+    font-weight: bold;
+    text-decoration: none;
+    transition: color 0.2s;
+    display: inline-flex;
+    align-items: center;
+}
+
+a.dark-link:hover, 
+a.dark-link:focus {
+    color: #6f42c1 !important;
+    text-decoration: none;
+}
+
+.dark-link .arrow {
+    margin-left: 0.4em;
+    font-size: 1em;
+    transition: color 0.2s;
+}
+
+a.dark-link:hover .arrow {
+    color: #6f42c1 !important;
 }

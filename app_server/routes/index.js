@@ -5,7 +5,10 @@ const ctrlMain = require('../controllers/main');
 /* GET home page. */
 router.get('/', ctrlMain.index); 
 
-//router.post('/register', ctrlMain.register)
+/* GET login page. */
+router.get('/login', ctrlMain.login);
+
+router.get('/register', ctrlMain.register)
 
 module.exports = router;
 
