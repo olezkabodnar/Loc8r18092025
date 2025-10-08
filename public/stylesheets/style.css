@@ -225,3 +225,14 @@ a.dark-link:focus {
 a.dark-link:hover .arrow {
     color: #6f42c1 !important;
 }
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-check {
+    padding-left: 1.5em;
+}
+
+.form-check-input {
+    margin-top: 0.25rem;
+}

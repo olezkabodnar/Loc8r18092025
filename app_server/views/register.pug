@@ -4,7 +4,7 @@ block content
   //https://getbootstrap.com/docs/3.4/css/#forms code taken from here
   .container
     .row
-      .col-md-6.col-md-offset-3
+      .col-md-6.offset-md-3
         .card
           .card-header
             h3 Register
@@ -22,9 +22,9 @@ block content
               .form-group
                 label(for='exampleInputPassword') Re-enter Password
                 input#exampleInputPassword1.form-control(type='password' name='reenter-password' placeholder='Password' required)
-              .checkbox
-                label
-                  input(type='checkbox' name='remember')
+              .form-check.mb-3
+                input#rememberMe.form-check-input(type='checkbox' name='remember')
+                label.form-check-label(for='rememberMe')
                   |  Remember me
               button.btn.btn-primary(type='submit') Register
             .text-center.mt-3
