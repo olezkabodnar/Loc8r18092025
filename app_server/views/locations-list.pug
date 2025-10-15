@@ -1,0 +1,61 @@
+extends layout
+
+include _includes/sharedHTMLfunctions
+
+block content
+  #banner.page-header
+    .row
+      .col-lg-12
+        h1= pageHeader.title
+          small &nbsp;#{pageHeader.strapline}
+  .row
+    .col-xs-12.col-md-6
+      .saved-places-section
+        h3.section-title My Saved Places
+        .list-group
+          if locations && locations.length > 0
+            each location in locations
+              .list-group-item.saved-location
+                .location-card
+                  .location-image
+                    img(src=location.image || '/images/placeholder.jpg', alt=location.name)
+                  .location-info
+                    .location-name-rating
+                      h4.location-name
+                        a(href="/location")= location.name
+                    .rating-info
+                      span.rating-score= location.rating
+                      | &nbsp;
+                      span.glyphicon.glyphicon-star
+                      | &nbsp;
+                      span.review-count (#{location.reviewCount || 0})
+                    .location-category= location.category || 'Place'
+                    p.address= location.address
+                    .location-actions
+                      button.btn.btn-sm.btn-danger.remove-btn(title="Remove from saved places")
+                        i.fa.fa-trash
+          else
+            .empty-state
+              p.text-muted No saved places yet. Search and add places on the right!
+
+    .col-xs-12.col-md-6
+      .search-section
+        h3.section-title Search for Places
+        .search-box
+          form(action="/search", method="GET")
+            .form-group
+              label(for="location-search") Location
+              input.form-control#location-search(type="text", name="location", placeholder="Enter city, address, or area...")
+            .form-group
+              label(for="search-type") Type of Place
+              select.form-control#search-type(name="type")
+                option(value="") All Types
+                option(value="cafe") Cafe
+                option(value="restaurant") Restaurant
+                option(value="coworking") Co-working Space
+                option(value="library") Library
+                option(value="park") Park
+            button.btn.btn-primary.btn-block(type="submit") Search Places
+
+        .search-info
+          p.lead= sidebar
