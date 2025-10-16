@@ -1,33 +1,32 @@
 extends layout
 
 block content
-  //https://getbootstrap.com/docs/3.4/css/#forms code taken from here
   .container
     .row
       .col-md-6.col-md-offset-3
         .card
           .card-header
-            h3 Register
+            h3= pageHeader.title
           .card-body
             form(method='POST' action='/register')
               .form-group
-                label(for='exampleInputName') Name
-                input#exampleInputName.form-control(type='text' name='name' placeholder='Name' required)
+                label(for='exampleInputName')= formFields.name.label
+                input#exampleInputName.form-control(type=formFields.name.type name=formFields.name.name placeholder=formFields.name.placeholder required)
               .form-group
-                label(for='exampleInputEmail1') Email address
-                input#exampleInputEmail1.form-control(type='email' name='email' placeholder='Email' required)
+                label(for='exampleInputEmail1')= formFields.email.label
+                input#exampleInputEmail1.form-control(type=formFields.email.type name=formFields.email.name placeholder=formFields.email.placeholder required)
               .form-group
-                label(for='exampleInputPassword') Password
-                input#exampleInputPassword1.form-control(type='password' name='password' placeholder='Password' required)
+                label(for='exampleInputPassword')= formFields.password.label
+                input#exampleInputPassword1.form-control(type=formFields.password.type name=formFields.password.name placeholder=formFields.password.placeholder required)
               .form-group
-                label(for='exampleInputPassword') Re-enter Password
-                input#exampleInputPassword1.form-control(type='password' name='reenter-password' placeholder='Password' required)
+                label(for='exampleInputPassword2')= formFields.reenterPassword.label
+                input#exampleInputPassword2.form-control(type=formFields.reenterPassword.type name=formFields.reenterPassword.name placeholder=formFields.reenterPassword.placeholder required)
               .checkbox
                 label
                   input(type='checkbox' name='remember')
-                  |  Remember me
-              button.btn.btn-primary(type='submit') Register
+                  | &nbsp;#{rememberMe}
+              button.btn.btn-primary(type='submit')= submitButton
             .text-center.mt-3
-              small Already have an account? 
-                a(href='/login') Login here
+              small #{footerText}
+                a(href=footerLink.url)= footerLink.text
 
