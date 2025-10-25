@@ -5,10 +5,10 @@
   "scripts": {
     "start": "node ./bin/www"
   },
-"engines": {
-  "node": "v22.16.0", 
-  "npm": "10.9.2"},
-  
+  "engines": {
+    "node": "v22.16.0",
+    "npm": "10.9.2"
+  },
   "dependencies": {
     "bootstrap": "^3.3.7",
     "cookie-parser": "~1.4.4",
@@ -16,6 +16,7 @@
     "express": "~4.16.1",
     "font-awesome": "^4.7.0",
     "http-errors": "~1.6.3",
+    "mongoose": "^8.19.2",
     "morgan": "~1.9.1",
     "pug": "2.0.0-beta11"
   }

@@ -18,19 +18,19 @@ block content
               .list-group-item.saved-location
                 .location-card
                   .location-image
-                    img(src=location.image || '/images/placeholder.jpg', alt=location.name)
+                    img(src=location.photoUrl || '/images/placeholder.jpg', alt=location.placeName)
                   .location-info
                     .location-name-rating
                       h4.location-name
-                        a(href="/location")= location.name
+                        a(href="/location")= location.placeName
                     .rating-info
-                      span.rating-score= location.rating
+                      span.rating-score= location.overallScore
                       | &nbsp;
                       span.glyphicon.glyphicon-star
                       | &nbsp;
                       span.review-count (#{location.reviewCount || 0})
-                    .location-category= location.category || 'Place'
-                    p.address= location.address
+                    .location-category= location.placeType || 'Place'
+                    p.address= location.fullAddress
                     .location-actions
                       button.btn.btn-sm.btn-danger.remove-btn(title="Remove from saved places")
                         i.fa.fa-trash
