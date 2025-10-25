@@ -1,0 +1,38 @@
+extends layout
+
+block content
+  .row.page-header
+    .col-lg-12
+      h1= pageHeader.title
+  .row
+    .col-xs-12
+      p
+        span= location.overallScore
+        | &nbsp;
+        i.fa.fa-star
+        | &nbsp;(#{location.reviewCount})
+      p= location.fullAddress
+      p
+        i.fa.fa-square-o
+        | &nbsp;#{location.contactPhone}
+      p
+        i.fa.fa-square-o
+        | &nbsp;
+        a(href=location.webUrl, target="_blank")= location.webUrl
+
+      .panel.panel-primary
+        .panel-heading
+          h2.panel-title Opening hours
+        .panel-body
+          each time in location.openingHours
+            p= time
+
+      .panel.panel-primary
+        .panel-heading
+          h2.panel-title Features
+        .panel-body
+          each feature in location.features
+            span.label.label-warning
+              i.fa.fa-check
+              | &nbsp;#{feature}
+            | &nbsp;

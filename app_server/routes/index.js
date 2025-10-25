@@ -6,6 +6,7 @@ const ctrlLocations = require('../controllers/locations');
 
 
 router.get('/', ctrlLocations.homelist);
+router.get('/location', ctrlLocations.locationInfo);
 
 
 /* Other pages */

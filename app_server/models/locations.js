@@ -21,16 +21,6 @@ const placeSchema = new mongoose.Schema({
     max: 5
   },
   features: [String],
-  geoLocation: {
-    lat: {
-      type: Number,
-      required: false
-    },
-    lng: {
-      type: Number,
-      required: false
-    }
-  },
   openingHours: [String],
   reviewCount: {
     type: Number,

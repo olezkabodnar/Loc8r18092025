@@ -51,10 +51,6 @@ const locationInfo = function(req, res) {
         pageHeader: {
             title: 'The Coffee Bean'
         },
-        sidebar: {
-            context: 'is on Loc8r because it has accessible wifi and space to sit down with your laptop and get some work done.',
-            callToAction: "If you've been and you like it - or if you don't - please leave a review to help other people just like you."
-        },
         location: {
             placeName: 'The Coffee Bean',
             fullAddress: '23 Grafton Street, Dublin 2, Ireland',
@@ -62,7 +58,6 @@ const locationInfo = function(req, res) {
             features: ['Espresso bar', 'Pastries', 'Free WiFi', 'Outdoor seating'],
             contactPhone: '+353 1 678 9012',
             webUrl: 'https://coffeebean.ie',
-            geoLocation: {lat: 53.342778, lng: -6.260278},
             openingHours: [
                 'Monday - Thursday: 8:00am - 6:00pm',
                 'Friday: 8:00am - 8:00pm',
