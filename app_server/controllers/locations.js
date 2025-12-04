@@ -2,7 +2,7 @@
 const request = require('request');
 
 const apiOptions = {
-  server: 'http://localhost:3000'
+  server: process.env.API_URL || 'http://localhost:3000'
 };
 
 
