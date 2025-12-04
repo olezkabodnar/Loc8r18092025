@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const path = require('path');
 
 const ctrlMain = require('../controllers/main');
 const ctrlLocations = require('../controllers/locations');
@@ -15,7 +16,11 @@ const isAuthenticated = (req, res, next) => {
 // Protected routes - require login
 router.get('/', isAuthenticated, ctrlLocations.homelist);
 router.get('/search', isAuthenticated, ctrlLocations.searchResults);
-router.get('/location', isAuthenticated, ctrlLocations.locationInfo);
+
+// Serve Angular app for location details page
+router.get('/location', isAuthenticated, (req, res) => {
+  res.sendFile(path.join(__dirname, '../../public/angular/index.html'));
+});
 
 
 /* Authentication pages */
