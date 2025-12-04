@@ -1,14 +1,10 @@
 const mongoose = require('mongoose');
 
 const mongoUri = process.env.MONGODB_URI;
-mongoose.connect(mongoUri);
-// Load models first before connecting
-require('./locations');
-require('./users');
 
 try {
   mongoose.connect(
-    dbURI,
+    mongoUri,
     { useNewUrlParser: true, useUnifiedTopology: true }
   ).then(
     () => { console.log("Mongoose is connected"); },
@@ -17,3 +13,7 @@ try {
 } catch (e) {
   console.log("could not connect");
 }
+
+// Load models after connecting
+require('./locations');
+require('./users');
