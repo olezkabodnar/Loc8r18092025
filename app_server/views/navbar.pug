@@ -1,6 +1,14 @@
 ul.nav.nav-tabs
-  li.active(role='presentation')
-    a(href='#') Login
-  li(role='presentation')
-    a(href='#') Register
+  if currentUser
+    li(role='presentation')
+      a(href='/') Home
+    li(role='presentation')
+      a(href='#') Welcome, #{currentUser.name || currentUser.email}
+    li(role='presentation')
+      a(href='/logout') Logout
+  else
+    li(role='presentation')
+      a(href='/login') Login
+    li(role='presentation')
+      a(href='/register') Register
 

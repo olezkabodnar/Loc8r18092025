@@ -9,17 +9,25 @@ block content
           .card-header
             h3= pageHeader.title
           .card-body
+            if error && error.length
+              .alert.alert-danger
+                each err in error
+                  p= err
+            if success && success.length
+              .alert.alert-success
+                each msg in success
+                  p= msg
             form(method='POST' action='/login')
               .form-group
-                label(for='exampleInputEmail1')= formFields.email.label
-                input#exampleInputEmail1.form-control(type=formFields.email.type name=formFields.email.name placeholder=formFields.email.placeholder required)
+                label(for='email')= formFields.email.label
+                input#email.form-control(type=formFields.email.type name=formFields.email.name placeholder=formFields.email.placeholder required)
               .form-group
-                label(for='exampleInputPassword1')= formFields.password.label
-                input#exampleInputPassword1.form-control(type=formFields.password.type name=formFields.password.name placeholder=formFields.password.placeholder required)
+                label(for='password')= formFields.password.label
+                input#password.form-control(type=formFields.password.type name=formFields.password.name placeholder=formFields.password.placeholder required)
               .checkbox
                 label
                   input(type='checkbox' name='remember')
-                  | &nbsp;#{rememberMe}
+                  |  #{rememberMe}
               button.btn.btn-primary(type='submit')= submitButton
             .text-center.mt-3
               small #{footerText}
