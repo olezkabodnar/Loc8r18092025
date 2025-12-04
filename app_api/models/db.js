@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
-const dbURI = "mongodb+srv://olezkabodnar_db_user:Admin@cluster1.086xgm2.mongodb.net/?appName=Cluster1/Loc8r?retryWrites=true&w=majority";
-
+const mongoUri = process.env.MONGODB_URI;
+mongoose.connect(mongoUri);
 // Load models first before connecting
 require('./locations');
 require('./users');
