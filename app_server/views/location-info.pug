@@ -4,6 +4,15 @@ block content
   .row.page-header
     .col-lg-12
       h1= pageHeader.title
+      p
+        button.btn.btn-primary.save-location-btn(data-location-id=location._id, data-location-name=location.placeName)
+          if location.saved
+            i.fa.fa-heart
+            | &nbsp;Unsave Place
+          else
+            i.fa.fa-heart-o
+            | &nbsp;Save Place
+
   .row
     .col-xs-12
       p

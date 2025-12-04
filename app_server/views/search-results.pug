@@ -1,0 +1,34 @@
+extends layout
+
+block content
+  #banner.page-header
+    .row
+      .col-lg-12
+        h1= pageHeader.title
+          small &nbsp;#{pageHeader.strapline}
+
+  .row
+    .col-xs-12
+      .search-results-section
+        if results && results.length > 0
+          .list-group
+            each result in results
+              .list-group-item.saved-location(data-place-id=result._id)
+                .location-card
+                  .location-image
+                    img(src=result.photoUrl || '/images/placeholder.jpg', alt=result.placeName)
+                  .location-info
+                    .location-name-rating
+                      h4.location-name
+                        a(href="/location?id=" + result._id)= result.placeName
+                    .rating-info
+                      span.rating-score= result.overallScore
+                      | &nbsp;
+                      span.glyphicon.glyphicon-star
+                      | &nbsp;
+                      span.review-count (#{result.reviewCount || 0})
+                    .location-category= result.placeType || 'Place'
+                    p.address= result.fullAddress
+        else
+          .empty-state
+            p.text-muted No results found. 

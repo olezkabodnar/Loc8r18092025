@@ -1,11 +1,16 @@
 /* GET home page */
+const request = require('request');
 
-
-const index = function(req, res){ 
-res.render('index', { title: 'Express' }); 
+const apiOptions = {
+  server: 'http://localhost:3000'
 };
 
 
+const index = function(req, res){
+  res.render('index', { title: 'Express' });
+};
+
+// GET login page
 const login = function(req, res){
     res.render('login', {
         title: 'Login - Loc8r',
@@ -36,6 +41,41 @@ const login = function(req, res){
     });
 };
 
+// POST login - calls API
+const doLogin = function(req, res){
+    const path = '/api/login';
+    const requestOptions = {
+        url: apiOptions.server + path,
+        method: 'POST',
+        json: {
+            email: req.body.email,
+            password: req.body.password
+        }
+    };
+
+    request(requestOptions, (err, response, body) => {
+        if (err) {
+            res.status(500).render('error', {
+                message: 'Error connecting to API',
+                error: err
+            });
+        } else if (response.statusCode === 200) {
+            res.redirect('/');
+        } else if (response.statusCode === 404 || response.statusCode === 401) {
+            res.status(response.statusCode).render('error', {
+                message: body.message || 'Login failed',
+                error: body
+            });
+        } else {
+            res.status(response.statusCode).render('error', {
+                message: 'Error logging in',
+                error: body
+            });
+        }
+    });
+};
+
+// GET register page
 const register = function(req, res){
     res.render('register', {
         title: 'Register - Loc8r',
@@ -78,11 +118,47 @@ const register = function(req, res){
     });
 };
 
+// POST register - calls API
+const doRegister = function(req, res){
+    const path = '/api/register';
+    const requestOptions = {
+        url: apiOptions.server + path,
+        method: 'POST',
+        json: {
+            name: req.body.name,
+            email: req.body.email,
+            password: req.body.password
+        }
+    };
+
+    request(requestOptions, (err, response, body) => {
+        if (err) {
+            res.status(500).render('error', {
+                message: 'Error connecting to API',
+                error: err
+            });
+        } else if (response.statusCode === 201) {
+            res.redirect('/login');
+        } else if (response.statusCode === 400) {
+            res.status(response.statusCode).render('error', {
+                message: body.message || 'Registration failed',
+                error: body
+            });
+        } else {
+            res.status(response.statusCode).render('error', {
+                message: 'Error registering user',
+                error: body
+            });
+        }
+    });
+};
 
 
-module.exports = { 
-index,
-login,
-register
 
+module.exports = {
+  index,
+  login,
+  doLogin,
+  register,
+  doRegister
 };

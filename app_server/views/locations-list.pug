@@ -15,14 +15,14 @@ block content
         .list-group
           if locations && locations.length > 0
             each location in locations
-              .list-group-item.saved-location
+              .list-group-item.saved-location(data-place-id=location._id)
                 .location-card
                   .location-image
                     img(src=location.photoUrl || '/images/placeholder.jpg', alt=location.placeName)
                   .location-info
                     .location-name-rating
                       h4.location-name
-                        a(href="/location")= location.placeName
+                        a(href="/location?id=" + location._id)= location.placeName
                     .rating-info
                       span.rating-score= location.overallScore
                       | &nbsp;
@@ -32,8 +32,13 @@ block content
                     .location-category= location.placeType || 'Place'
                     p.address= location.fullAddress
                     .location-actions
-                      button.btn.btn-sm.btn-danger.remove-btn(title="Remove from saved places")
-                        i.fa.fa-trash
+                      button.btn.btn-sm.btn-primary.save-location-btn(data-location-id=location._id, data-location-name=location.placeName, title="Save/Unsave this place")
+                        if location.saved
+                          i.fa.fa-heart
+                          | &nbsp;Unsave
+                        else
+                          i.fa.fa-heart-o
+                          | &nbsp;Save
           else
             .empty-state
               p.text-muted No saved places yet. Search and add places on the right!

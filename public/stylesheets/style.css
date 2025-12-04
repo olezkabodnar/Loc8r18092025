@@ -486,6 +486,7 @@ footer {
     border: 1px solid #ddd;
     border-radius: 5px;
     padding: 10px;
+    height: 45px;
 }
 
 .search-box .form-control:focus {

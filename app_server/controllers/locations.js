@@ -1,82 +1,130 @@
 /* GET 'home' page */
+const request = require('request');
+
+const apiOptions = {
+  server: 'http://localhost:3000'
+};
+
+
+const _renderHomepage = function(req, res, responseBody) {
+  res.render('locations-list', {
+    title: 'Loc8r - Save and discover great places',
+    pageHeader: {
+      title: 'My Places',
+      strapline: 'Organize your favorite locations'
+    },
+    sidebar: "Search for cafes, restaurants, co-working spaces, and more. Save your favorite places and keep them organized in one place.",
+    locations: responseBody
+  });
+};
+
 const homelist = function(req, res) {
-    res.render('locations-list', {
-        title: 'Loc8r - Save and discover great places',
-        pageHeader: {
-            title: 'My Places',
-            strapline: 'Organize your favorite locations'
-        },
-        sidebar: "Search for cafes, restaurants, co-working spaces, and more. Save your favorite places and keep them organized in one place.",
-        locations: [
-            {
-                placeName: 'The Daily Grind',
-                fullAddress: '42 Oak Avenue, Dublin 2, Ireland',
-                overallScore: 4,
-                features: ['Hot drinks', 'Food', 'Premium wifi'],
-                placeType: 'Cafe',
-                photoUrl: 'https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=150&h=150&fit=crop',
-                contactPhone: '+353 1 234 5678',
-                webUrl: 'https://dailygrind.ie',
-                reviewCount: 128
-            },
-            {
-                placeName: 'Urban Workspace',
-                fullAddress: '15 Tech Park, Silicon Docks, Dublin',
-                overallScore: 5,
-                features: ['Hot drinks', 'Food', 'Premium wifi'],
-                placeType: 'Co-working Space',
-                photoUrl: 'https://images.unsplash.com/photo-1445116572660-236099ec97a0?w=150&h=150&fit=crop',
-                contactPhone: '+353 1 345 6789',
-                webUrl: 'https://urbanworkspace.ie',
-                reviewCount: 89
-            },
-            {
-                placeName: 'Green Garden Library',
-                fullAddress: '8 College Road, Cork, Ireland',
-                overallScore: 4,
-                features: ['Food', 'Premium wifi'],
-                placeType: 'Library',
-                photoUrl: 'https://images.unsplash.com/photo-1550547660-d9450f859349?w=150&h=150&fit=crop',
-                contactPhone: '+353 21 456 7890',
-                reviewCount: 54
-            }
-        ]
+  const path = '/api/locations';
+  const requestOptions = {
+    url: apiOptions.server + path,
+    method: 'GET',
+    json: true
+  };
+
+  request(requestOptions, (err, response, body) => {
+    if (err) {
+      console.error('API Error:', err);
+      res.status(500).render('error', {
+        message: 'Error connecting to API',
+        error: err
+      });
+    } else if (response.statusCode === 200) {
+      console.log('API Response:', body);
+      _renderHomepage(req, res, body);
+    } else {
+      console.error('API Status Code:', response.statusCode);
+      res.status(response.statusCode).render('error', {
+        message: 'Error retrieving locations',
+        error: body
+      });
+    }
+  });
+};
+
+/* GET 'Search results' page */
+const searchResults = function(req, res) {
+  const location = req.query.location || '';
+  const type = req.query.type || '';
+
+  const path = `/api/locations/search?location=${encodeURIComponent(location)}&type=${encodeURIComponent(type)}`;
+  const requestOptions = {
+    url: apiOptions.server + path,
+    method: 'GET',
+    json: true
+  };
+
+  request(requestOptions, (err, response, body) => {
+    let results = [];
+
+    if (!err && response.statusCode === 200 && body) {
+      results = body;
+    }
+
+    res.render('search-results', {
+      title: 'Search Results',
+      pageHeader: {
+        title: 'Search Results',
+        strapline: `Showing results for "${location}"${type ? ` - ${type}` : ''}`
+      },
+      searchParams: {
+        location: location,
+        type: type
+      },
+      results: results
     });
+  });
 };
 
 /* GET 'Location info' page */
 const locationInfo = function(req, res) {
-    res.render('location-info', {
-        title: 'The Coffee Bean',
-        pageHeader: {
-            title: 'The Coffee Bean'
-        },
-        location: {
-            placeName: 'The Coffee Bean',
-            fullAddress: '23 Grafton Street, Dublin 2, Ireland',
-            overallScore: 4,
-            features: ['Espresso bar', 'Pastries', 'Free WiFi', 'Outdoor seating'],
-            contactPhone: '+353 1 678 9012',
-            webUrl: 'https://coffeebean.ie',
-            openingHours: [
-                'Monday - Thursday: 8:00am - 6:00pm',
-                'Friday: 8:00am - 8:00pm',
-                'Saturday - Sunday: 9:00am - 5:00pm'
-            ],
-            reviewCount: 23
-        }
-    });
-};
+  const locationId = req.query.id || '';
 
-/* GET 'Add review' page */
-const addReview = function(req, res) {
-    res.render('location-review-form', {
-        title: 'Add review'
+  if (!locationId) {
+    return res.status(400).render('error', {
+      message: 'No location selected',
+      error: { status: 'Please select a location to view details' }
     });
+  }
+
+  const path = `/api/locations/${locationId}`;
+  const requestOptions = {
+    url: apiOptions.server + path,
+    method: 'GET',
+    json: true
+  };
+
+  request(requestOptions, (err, response, body) => {
+    if (err) {
+      return res.status(500).render('error', {
+        message: 'Error retrieving location details',
+        error: err
+      });
+    }
+
+    if (response.statusCode === 200 && body) {
+      res.render('location-info', {
+        title: body.placeName,
+        pageHeader: {
+          title: body.placeName
+        },
+        location: body
+      });
+    } else {
+      res.status(response.statusCode).render('error', {
+        message: 'Location not found',
+        error: body
+      });
+    }
+  });
 };
 
 module.exports = {
     homelist,
-    locationInfo,
-    addReview
+    searchResults,
+    locationInfo
 };
